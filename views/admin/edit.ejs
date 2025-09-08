@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Edit Post - abelashine</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <a href="/admin">Back</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Edit Post</h1>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <form method="post" action="/admin/posts/<%= post.id %>?_method=PUT" enctype="multipart/form-data">
+      <input type="text" name="title" placeholder="Title" value="<%= post.title %>" required />
+      <textarea name="content" placeholder="Write your article..." rows="16" required><%= post.content %></textarea>
+      <label>Upload images</label>
+      <input type="file" name="images" accept="image/*" multiple />
+      <button>Save</button>
+    </form>
+  </main>
+</body>
+<footer>
+  <p class="site-footer">© 2025 abelashine</p>
+</footer>
+</html>
+
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Broadcast - abelashine</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Send to subscribers</h1>
+    <nav>
+      <a href="/admin">Back</a>
+    </nav>
+  </header>
+  <main>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <% if (sent) { %>
+      <p class="notice">Broadcast sent to all subscribers.</p>
+    <% } %>
+    <form method="post" action="/admin/broadcast">
+      <input type="text" name="subject" placeholder="Subject" value="<%= subject %>" required />
+      <textarea name="message" placeholder="Write your message..." rows="12" required><%= message %></textarea>
+      <button>Send to subscribers</button>
+    </form>
+  </main>
+</body>
+<footer>
+  <p class="site-footer">© 2025 abelashine</p>
+</footer>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Abel Ashine</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1><a href="/">Abel Ashine</a></h1>
+    <nav>
+      <% if (currentUserId) { %>
+        <a href="/admin">Admin</a>
+        <form method="post" action="/logout" style="display:inline">
+          <button>Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Login</a>
+      <% } %>
+    </nav>
+  </header>
+
+  <main>
+    <% if (typeof subscribed !== 'undefined') { %>
+      <% if (subscribed) { %>
+        <p class="notice">Subscribed successfully. Check your inbox for updates.</p>
+      <% } else { %>
+        <p class="notice">You are already subscribed with that email.</p>
+      <% } %>
+    <% } %>
+    <section class="subscribe">
+      <h3>Subscribe for updates</h3>
+      <form method="post" action="/subscribe">
+        <input type="email" name="email" placeholder="your@email" required />
+        <button>Subscribe</button>
+      </form>
+    </section>
+    <section>
+      <% if (posts.length === 0) { %>
+        <p>No posts yet.</p>
+      <% } %>
+      <ul class="post-list">
+        <% posts.forEach(p => { %>
+          <li>
+            <h2><a href="/post/<%= p.slug %>"><%= p.title %></a></h2>
+            <p class="meta">Published <%= new Date(p.created_at).toLocaleString() %>
+              <% if (p.updated_at) { %>
+                • Updated <%= new Date(p.updated_at).toLocaleString() %>
+              <% } %>
+            </p>
+            <p><%= p.excerpt %>...</p>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p class="site-footer">© 2025 abelashine</p>
+  </footer>
+</body>
+</html>
+
+

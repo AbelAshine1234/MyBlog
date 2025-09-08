@@ -1,0 +1,18 @@
+{
+  "ignore": [
+    "data/*",
+    "data/**",
+    "*.sqlite",
+    "**/*.sqlite"
+  ],
+  "watch": [
+    "app.js",
+    "routes.js",
+    "views",
+    "public",
+    "db.js"
+  ],
+  "ext": "js,json,ejs,css"
+}
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin - abelashine</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Admin</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/admin/posts/new">New Post</a>
+      <a href="/admin/broadcast">Send to subscribers</a>
+      <form method="post" action="/logout" style="display:inline">
+        <button>Logout</button>
+      </form>
+    </nav>
+  </header>
+
+  <main class="admin">
+    <section>
+      <h2>Posts</h2>
+      <table>
+        <thead>
+          <tr><th>Title</th><th>Created</th><th>Updated</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% posts.forEach(p => { %>
+            <tr>
+              <td><a href="/post/<%= p.slug %>" target="_blank"><%= p.title %></a></td>
+              <td><%= new Date(p.created_at).toLocaleString() %></td>
+              <td><%= p.updated_at ? new Date(p.updated_at).toLocaleString() : '-' %></td>
+              <td>
+                <a href="/admin/posts/<%= p.id %>/edit">Edit</a>
+                <form method="post" action="/admin/posts/<%= p.id %>?_method=DELETE" style="display:inline">
+                  <button onclick="return confirm('Delete this post?')">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Subscribers</h2>
+      <table>
+        <thead>
+          <tr><th>Email</th><th>Subscribed</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% subscribers.forEach(s => { %>
+            <tr>
+              <td><%= s.email %></td>
+              <td><%= new Date(s.created_at).toLocaleString() %></td>
+              <td>
+                <form method="post" action="/admin/subscribers/<%= s.id %>?_method=DELETE" style="display:inline">
+                  <button onclick="return confirm('Delete subscriber <%= s.email %>?')">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+<footer>
+  <p class="site-footer">© 2025 abelashine</p>
+</footer>
+</html>
+
+
