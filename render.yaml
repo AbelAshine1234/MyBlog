@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: abelashine
+    env: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    nodeVersion: 20
+    plan: starter
+    disk:
+      name: data
+      mountPath: data
+      sizeGB: 2
+    envVars:
+      - key: RESEND_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        value: "abelashine <onboarding@resend.dev>"
+      # Optional SMTP fallback (uses Resend SMTP)
+      - key: SMTP_HOST
+        value: smtp.resend.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_SECURE
+        value: "true"
+      - key: SMTP_REQUIRE_TLS
+        value: "false"
+      - key: SMTP_USER
+        value: resend
+      - key: SMTP_PASS
+        sync: false
+
+
